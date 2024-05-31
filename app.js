@@ -13,7 +13,7 @@ app.use(express.json());
 // Define HTTP routes listenting for requests
 app.get("/api", async (req,res) => {
   res.setEncoding("List retrieved");
-})
+});
 
 app.post("/api", async (req,res) => {
 
@@ -26,7 +26,7 @@ app.all("*", (req,res) => {
 
 // Create a server
 const appName = "Simple List";
-const port = 5000;
+const port = 5500;
 app.listen(port, () => {
-  console.log(`App ${appName} is running on port ${port}`);
+  console.log(`App ${appName} is running on http://localhost:${port}`);
 })
