@@ -1,5 +1,5 @@
-const fs = require("fs/promises")
-const path = require("path")
+const fs = require("fs/promises");
+const path = require("path");
 
 const jsonFile = path.join(__dirname, 'Node', 'listdata.json');
 
