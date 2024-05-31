@@ -1,0 +1,3 @@
+Update filemanager.js to read and write data to a file named listdata.json The data should be in an array of string values.
+Update app.js to complete the get and post functions.
+Update client\script.js to complete all empty functions.
