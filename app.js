@@ -45,11 +45,20 @@ app.use(checkId);**/
 
 // Define HTTP routes listenting for requests
 app.get("/api", async (req,res) => {
-  res.setEncoding("List retrieved");
+  try{
+    res.send(await fm.ReadData());
+  }catch(err){
+    console.error(err);
+  }
 });
 
 app.post("/api", async (req,res) => {
-
+  try{
+    await fm.WriteData(req.body);
+    res.send();
+  }catch(err){
+    console.error(err);
+  }
 })
 
 // page not found route

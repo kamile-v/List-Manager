@@ -1,20 +1,18 @@
 const fs = require("fs/promises");
-const path = require("path");
-
-const jsonFile = path.join(__dirname, 'Node', 'listdata.json');
+const jsonFile = "./listdata.json";
 
 async function ReadData() {
   try {
     // Make sure the file exists
-    await fs.access(jsonFile);
+    await fs.access(jsonFile, fs.constants.R_OK|fs.constants.W_OK);
     // Read the file
-    const data = await fs.readFile(jsonFile, 'utf-8');
+    const data = await fs.readFile(jsonFile, "utf8");
     // convert the buffer to a json object and return it
     console.log('JSON file read successfully.');
     return JSON.parse(data);
   } catch (error) {
     console.error('ReadData() error');
-    return null;
+    return [];
   }
 }
 
@@ -22,11 +20,13 @@ async function WriteData(dataOut) {
   try {
     // Write the file
     const data = JSON.stringify(dataOut);
-    await fs.writeFile(jsonFile, data, 'utf-8');
-
+    await fs.writeFile(jsonFile, data, "utf8");
     console.log('JSON file written successfully.');
+
+    return;
   } catch (error) {
     console.error('WriteData() error');
+    return;
   }
 }
 
