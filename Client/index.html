@@ -13,14 +13,24 @@
     <form>
       <h3>On my list</h3>
       <section>
+        <label for="listitem">Item:</label>
         <input type="text"
         name="listitem"
         id="listitem"
         autocomplete="false"
         />
       </section>
+      <section>
+        <label for="newitem">Change To:</label>
+        <input type="text"
+        name="newitem"
+        id="newitem"
+        autocomplete="false"
+        />
+      </section>
       <button type="submit" class="add-btn">Add</button>
       <button type="submit" class="del-btn">Delete</button>
+      <button type="submit" class="change-btn">Change</button>
     </form>
     <div class="result"></div>
   </div>

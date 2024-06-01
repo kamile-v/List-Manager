@@ -14,12 +14,15 @@ let theList = [];
 // setup selectors
 const result = document.querySelector(".result");
 const input =  document.querySelector("#listitem");
+const newItem =  document.querySelector("#newitem");
 const addButton =  document.querySelector(".add-btn");
 const delButton =  document.querySelector(".del-btn");
+const changeButton =  document.querySelector(".change-btn");
 
 // Listeners
 addButton.addEventListener("click", httpPost);
 delButton.addEventListener("click", httpDelete);
+changeButton.addEventListener("click", httpChange);
 
 /* Helper Functions */
 function ShowList() {
@@ -70,8 +73,7 @@ async function WriteList() {
 /* Listener Functions */
 async function httpPost(e) {
   try{
-    let newItem = input.value;
-    theList.push(newItem);
+    theList.push(input.value);
     ShowList();
     await WriteList();
   }catch(error){
@@ -101,6 +103,30 @@ async function httpDelete(e) {
   }
 }
 
+/**
+ * http Change
+ * Occurs when a request to change an existing item from the list is 
+ * triggered from the website. Changes the old item to the newly 
+ * requested one. If the old item does not exist, the change is unable
+ * to happen. Catches and error that occurs and outputs an error 
+ * message accordingly.
+ * @param e
+ */
+async function httpChange(e) {
+  try{
+    const index = theList.indexOf(input.value);
+    if (index !== -1) {
+      theList.splice(index, 1, newItem.value);
+      ShowList();
+      await WriteList();
+    }else{
+      input.value = "unavailable item";
+    }
+  }catch(error){
+    console.error('httpChange() failed');
+  }
+}
+
 // Loading functions
 function showLoading() {
   result.innerHTML = "Loading...";
@@ -109,12 +135,14 @@ function showLoading() {
 async function main() {
   addButton.disabled = true;
   delButton.disabled = true;
+  changeButton.disabled = true;
   showLoading();
 
   await GetList();
 
   addButton.disabled = false;
   delButton.disabled = false;
+  changeButton.disabled = false;
 }
 
 main();
