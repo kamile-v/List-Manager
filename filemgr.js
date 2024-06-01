@@ -44,7 +44,6 @@ async function WriteData(dataOut) {
     // Write the file
     const data = JSON.stringify(dataOut);
     await fs.writeFile(jsonFile, data, "utf8");
-    console.log('JSON file written successfully.');
 
     return;
   } catch (error) {

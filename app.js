@@ -28,7 +28,6 @@ app.use(express.json());
 app.get("/api", async (req,res) => {
   try{
     res.send(await fm.ReadData());
-    console.log('app.get succeed.')
   }catch(err){
     console.error(err);
   }
@@ -46,7 +45,6 @@ app.post("/api", async (req,res) => {
   try{
     await fm.WriteData(req.body);
     res.send();
-    console.log('app.post succeed.')
   }catch(err){
     console.error(err);
   }
