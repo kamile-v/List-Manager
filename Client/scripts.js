@@ -24,22 +24,37 @@ function ShowList() {
 }
 
 async function GetList() {
-
+  try{
+    theList = await http.get("/api");
+    ShowList();
+  }catch(error){
+    console.error('GetList() failed');
+  }
 }
 
 async function WriteList() {
-
+  try {
+    await http.post("/api", theList);
+  } catch (error) {
+    console.error('WriteList() failed');
+  }
 }
 
 /* Listener Functions */
 async function httpPost(e) {
-
-  
+  let newItem = input.value;
+  theList.push(newItem);
+  ShowList();
+  await WriteList();
 }
 
-function httpDelete(e) {
-
-  
+async function httpDelete(e) {
+  const index = theList.indexOf(input.value);
+  if (index !== -1) {
+    theList.splice(index, 1);
+    ShowList();
+    await WriteList();
+  }
 }
 
 // Loading functions
