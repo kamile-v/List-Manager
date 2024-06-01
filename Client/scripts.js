@@ -42,18 +42,28 @@ async function WriteList() {
 
 /* Listener Functions */
 async function httpPost(e) {
-  let newItem = input.value;
-  theList.push(newItem);
-  ShowList();
-  await WriteList();
+  try{
+    let newItem = input.value;
+    theList.push(newItem);
+    ShowList();
+    await WriteList();
+  }catch(error){
+    console.error('httpPost() failed');
+  }
 }
 
 async function httpDelete(e) {
-  const index = theList.indexOf(input.value);
-  if (index !== -1) {
-    theList.splice(index, 1);
-    ShowList();
-    await WriteList();
+  try{
+    const index = theList.indexOf(input.value);
+    if (index !== -1) {
+      theList.splice(index, 1);
+      ShowList();
+      await WriteList();
+    }else{
+      input.value = "unavailable item";
+    }
+  }catch(error){
+    console.error('httpDelete() failed');
   }
 }
 

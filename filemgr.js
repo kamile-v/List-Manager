@@ -8,7 +8,6 @@ async function ReadData() {
     // Read the file
     const data = await fs.readFile(jsonFile, "utf8");
     // convert the buffer to a json object and return it
-    console.log('JSON file read successfully.');
     return JSON.parse(data);
   } catch (error) {
     console.error('ReadData() error');
@@ -21,7 +20,6 @@ async function WriteData(dataOut) {
     // Write the file
     const data = JSON.stringify(dataOut);
     await fs.writeFile(jsonFile, data, "utf8");
-    console.log('JSON file written successfully.');
 
     return;
   } catch (error) {
