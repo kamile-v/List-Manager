@@ -1,3 +1,11 @@
+/**
+ * Members: Tracy Mai, Minnie Cao, Kamile Vaicekonis
+ * Assignment: List Manager 
+ * File: script.js
+ * Course: CSC 3221 - Netcentric Computing - Dr. Dennis Vickers 
+ * 
+ */
+
 const http = new coreHTTP;
 
 // Block Variables
@@ -23,6 +31,12 @@ function ShowList() {
   result.innerHTML = output;
 }
 
+/**
+ * Get List
+ * Uses async and await to attempt to show the list as long as no 
+ * error occurs. Uses catch to print out an error message if there
+ * was an error.
+ */
 async function GetList() {
   try{
     theList = await http.get("/api");
@@ -32,6 +46,12 @@ async function GetList() {
   }
 }
 
+/**
+ * Write List
+ * Uses async and await to attempt to post the list as long as no 
+ * error occurs. Uses catch to print out an error message if there
+ * was an error.
+ */
 async function WriteList() {
   try {
     await http.post("/api", theList);
@@ -40,6 +60,13 @@ async function WriteList() {
   }
 }
 
+/**
+ * http Post
+ * Is triggered when a new item is added to the list from the website.
+ * Pushes the new item onto the list and calls Showlist and awaits
+ * for WriteList.
+ * @param e
+ */
 /* Listener Functions */
 async function httpPost(e) {
   let newItem = input.value;
@@ -48,6 +75,13 @@ async function httpPost(e) {
   await WriteList();
 }
 
+/**
+ * http Delete
+ * Occurs when a request to delete an item from the list is triggered
+ * from the website. Removes the item from the list and calls ShowList
+ * and awaits for
+ * @param e
+ */
 async function httpDelete(e) {
   const index = theList.indexOf(input.value);
   if (index !== -1) {
